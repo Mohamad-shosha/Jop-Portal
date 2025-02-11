@@ -10,37 +10,37 @@ public class UsersType {
     @Id
     @Column(name = "user_type_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int userTypeId;
 
     @Column(name = "user_type_name")
-    private String userName;
+    private String userTypeName;
 
-    @OneToMany(mappedBy = "usersTypeId", targetEntity = Users.class, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "userTypeId", targetEntity = Users.class, cascade = CascadeType.ALL)
     private List<Users> users;
 
     public UsersType() {
     }
 
     public UsersType(int id, String userName, List<Users> users) {
-        this.id = id;
-        this.userName = userName;
+        this.userTypeId = id;
+        this.userTypeName = userName;
         this.users = users;
     }
 
-    public int getId() {
-        return id;
+    public int getUserTypeId() {
+        return userTypeId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserTypeId(int userTypeId) {
+        this.userTypeId = userTypeId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserTypeName() {
+        return userTypeName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserTypeName(String userTypeName) {
+        this.userTypeName = userTypeName;
     }
 
     public List<Users> getUsers() {
@@ -54,8 +54,8 @@ public class UsersType {
     @Override
     public String toString() {
         return "UsersType{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
+                "userTypeId=" + userTypeId +
+                ", userTypeName='" + userTypeName + '\'' +
                 '}';
     }
 }
