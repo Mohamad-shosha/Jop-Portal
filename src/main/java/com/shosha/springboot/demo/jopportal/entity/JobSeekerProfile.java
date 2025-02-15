@@ -37,4 +37,8 @@ public class JobSeekerProfile {
     @OneToMany(targetEntity = Skills.class, cascade = CascadeType.ALL, mappedBy = "jobSeekerProfile")
     private List<Skills> skills;
 
+    public JobSeekerProfile(Users userId) {
+        this.userId = userId;
+    }
+
 }
