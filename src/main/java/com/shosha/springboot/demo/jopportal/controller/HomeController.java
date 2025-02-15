@@ -35,7 +35,7 @@ public class HomeController {
 
     @PostMapping("/register/new")
     public String register(@Valid Users user, Model model) {
-        Optional<Users> optionalUser = usersService.findUserByEmail(user.getEmail());
+        Optional<Users> optionalUser = usersService.getUserByEmail(user.getEmail());
         if (optionalUser.isPresent()) {
             List<UsersType> usersTypeList = usersTypeService.findAll();
             model.addAttribute("error",
@@ -44,7 +44,7 @@ public class HomeController {
             model.addAttribute("user", new Users());
             return "register";
         } else {
-            usersService.createUser(user);
+            usersService.addNew(user);
             return "dashboard";
         }
     }
