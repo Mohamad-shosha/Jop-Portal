@@ -8,6 +8,7 @@ import com.shosha.springboot.demo.jopportal.repository.RecruiterProfileRepositor
 import com.shosha.springboot.demo.jopportal.repository.UsersRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -20,17 +21,21 @@ public class UsersServiceImp {
     private final UsersRepository usersRepository;
     private final JobSeekerProfileRepository jobSeekerProfileRepository;
     private final RecruiterProfileRepository recruiterProfileRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UsersServiceImp(UsersRepository usersRepository, JobSeekerProfileRepository jobSeekerProfileRepository, RecruiterProfileRepository recruiterProfileRepository) {
+    public UsersServiceImp(UsersRepository usersRepository, JobSeekerProfileRepository jobSeekerProfileRepository,
+                           RecruiterProfileRepository recruiterProfileRepository, PasswordEncoder passwordEncoder) {
         this.usersRepository = usersRepository;
         this.jobSeekerProfileRepository = jobSeekerProfileRepository;
         this.recruiterProfileRepository = recruiterProfileRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Users addNew(Users users) {
         users.setIsActive(true);
         users.setRegistrationDate(new Date(System.currentTimeMillis()));
+        users.setPassword(passwordEncoder.encode(users.getPassword()));
         Users savedUser = usersRepository.save(users);
         log.info("User saved: {}", savedUser);
         int userTypeId = users.getUserTypeId().getUserTypeId();
