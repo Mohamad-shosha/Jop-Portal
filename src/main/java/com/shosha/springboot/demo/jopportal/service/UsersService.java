@@ -6,5 +6,8 @@ import java.util.Optional;
 
 public interface UsersService {
     Users addNew(Users user);
+
     Optional<Users> getUserByEmail(String username);
+
+    Object getCurrentUserProfile();
 }
