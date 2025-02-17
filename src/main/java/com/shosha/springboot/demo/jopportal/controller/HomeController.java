@@ -50,7 +50,7 @@ public class HomeController {
             return "register";
         } else {
             usersService.addNew(user);
-            return "dashboard";
+            return "redirect:/dashboard/";
         }
     }
 
