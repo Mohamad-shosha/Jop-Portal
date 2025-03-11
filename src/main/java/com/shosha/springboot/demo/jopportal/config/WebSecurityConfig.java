@@ -13,11 +13,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * The type Web security config.
+ */
 @Configuration
 public class WebSecurityConfig {
     private final CustomUserDetailsService customUserDetailsService;
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
+    /**
+     * Instantiates a new Web security config.
+     *
+     * @param customUserDetailsService           the custom user details service
+     * @param customAuthenticationSuccessHandler the custom authentication success handler
+     */
     @Autowired
     public WebSecurityConfig(CustomUserDetailsService customUserDetailsService,
                              CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {
@@ -40,6 +49,13 @@ public class WebSecurityConfig {
             "/*.js.map",
             "/fonts**", "/favicon.ico", "/resources/**", "/error"};
 
+    /**
+     * Security filter chain security filter chain.
+     *
+     * @param http the http
+     * @return the security filter chain
+     * @throws Exception the exception
+     */
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -60,6 +76,11 @@ public class WebSecurityConfig {
         return http.build();
     }
 
+    /**
+     * Authentication provider authentication provider.
+     *
+     * @return the authentication provider
+     */
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -68,6 +89,11 @@ public class WebSecurityConfig {
         return authenticationProvider;
     }
 
+    /**
+     * Password encoder password encoder.
+     *
+     * @return the password encoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

@@ -19,6 +19,9 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.Optional;
 
+/**
+ * The type Users service imp.
+ */
 @Slf4j
 @Service
 public class UsersServiceImp {
@@ -28,6 +31,14 @@ public class UsersServiceImp {
     private final RecruiterProfileRepository recruiterProfileRepository;
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Instantiates a new Users service imp.
+     *
+     * @param usersRepository            the users repository
+     * @param jobSeekerProfileRepository the job seeker profile repository
+     * @param recruiterProfileRepository the recruiter profile repository
+     * @param passwordEncoder            the password encoder
+     */
     @Autowired
     public UsersServiceImp(UsersRepository usersRepository, JobSeekerProfileRepository jobSeekerProfileRepository,
                            RecruiterProfileRepository recruiterProfileRepository, PasswordEncoder passwordEncoder) {
@@ -37,6 +48,12 @@ public class UsersServiceImp {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * Add new users.
+     *
+     * @param users the users
+     * @return the users
+     */
     public Users addNew(Users users) {
         users.setIsActive(true);
         users.setRegistrationDate(new Date(System.currentTimeMillis()));
@@ -54,6 +71,11 @@ public class UsersServiceImp {
         return savedUser;
     }
 
+    /**
+     * Gets current user profile.
+     *
+     * @return the current user profile
+     */
     public Object getCurrentUserProfile() {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -72,6 +94,12 @@ public class UsersServiceImp {
         return null;
     }
 
+    /**
+     * Gets user by email.
+     *
+     * @param email the email
+     * @return the user by email
+     */
     public Optional<Users> getUserByEmail(String email) {
         return usersRepository.findByEmail(email);
     }

@@ -10,9 +10,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * The type Custom user details.
+ */
 public class CustomUserDetails implements UserDetails {
     private final Users user;
 
+    /**
+     * Instantiates a new Custom user details.
+     *
+     * @param user the user
+     */
     public CustomUserDetails(Users user) {
         this.user = user;
     }
